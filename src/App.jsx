@@ -35,17 +35,13 @@ class App extends React.Component {
     );
   };
   componentDidMount() {
-    console.log('App componentDidMount');
     const contacts = JSON.parse(localStorage.getItem('contactsList'));
-    if (contacts.length > 0) {
+    if (contacts) {
       this.setState({ contacts: contacts });
     }
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('App componentDidUpdate');
     if (this.state.contacts !== prevState.contacts) {
-      console.log('ОБНОВИЛИСЯ КОНТАКТИ');
-      localStorage.setItem('contactsList', JSON.stringify(this.state.contacts));
     }
   }
   render() {
