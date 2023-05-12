@@ -20,6 +20,7 @@ class ContactForm extends React.Component {
       this.reset();
     }
   };
+
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });

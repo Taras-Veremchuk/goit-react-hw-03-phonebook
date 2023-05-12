@@ -2,6 +2,8 @@ import React from 'react';
 import { ContactForm, ContactList, Filter } from 'Сomponents/index';
 import shortid from 'shortid';
 import { PhonTitle, ContTitle, Container } from './Сomponents/PhoneBook.styled';
+
+const LS_KEY = 'phoneBook';
 class App extends React.Component {
   state = {
     filter: '',
@@ -35,15 +37,17 @@ class App extends React.Component {
     );
   };
   componentDidMount() {
-    const contacts = JSON.parse(localStorage.getItem('contactsList'));
+    const contacts = JSON.parse(localStorage.getItem(LS_KEY));
     if (contacts) {
       this.setState({ contacts: contacts });
     }
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.state.contacts !== prevState.contacts) {
+    if (this.state !== prevState) {
+      localStorage.setItem(LS_KEY, JSON.stringify(this.state.contacts));
     }
   }
+
   render() {
     const { contacts } = this.state;
     return (
